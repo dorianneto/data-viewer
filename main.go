@@ -17,5 +17,7 @@ func main() {
 		logger: logger,
 	}
 
-	http.ListenAndServe(":80", app.routes())
+	err := http.ListenAndServe(":80", app.routes())
+	logger.Error(err.Error())
+	os.Exit(1)
 }
