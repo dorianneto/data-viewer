@@ -7,6 +7,7 @@ import (
 func (app *application) routes() http.Handler {
 	mux := http.NewServeMux()
 
+	mux.HandleFunc("GET /{$}", app.healthCheckHandler)
 	mux.HandleFunc("POST /metadata", app.metadataHandler)
 
 	return mux

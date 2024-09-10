@@ -44,3 +44,7 @@ func (app *application) metadataHandler(w http.ResponseWriter, r *http.Request) 
 
 	w.Write(output)
 }
+
+func (app *application) healthCheckHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("okay!"))
+}
