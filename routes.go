@@ -2,6 +2,8 @@ package main
 
 import (
 	"net/http"
+
+	"github.com/justinas/alice"
 )
 
 func (app *application) routes() http.Handler {
@@ -10,5 +12,7 @@ func (app *application) routes() http.Handler {
 	mux.HandleFunc("GET /{$}", app.healthCheckHandler)
 	mux.HandleFunc("POST /metadata", app.metadataHandler)
 
-	return mux
+	middlewares := alice.New(app.logRequests)
+
+	return middlewares.Then(mux)
 }
